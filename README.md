@@ -6,21 +6,21 @@ ssh -p 22 bprouz@188.130.162.10
 
 ## Step 2. Clone git repository outside the public_html directory
 
-First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current public_html/ directory, which is accessible publicly via web domain, for example:
+First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current `public_html/` directory, which is accessible publicly via web domain, for example:
 
-```
+```bash
 /home/<username>/public_html
 ```
 
-Now, create a new directory, which contains all your application source code, at the same level as public_html/, for example:
+Now, create a new directory, which contains all your application source code, at the same level as `public_html/`, for example:
 
-```
+```bash
 /home/<username>/project
 ```
 
 Use *git* to transfer your code to this directory:
 
-```
+```bash
 git clone https://github.com/username/your-app project
 ```
 
@@ -44,7 +44,7 @@ $app = require_once __DIR__.'/../project/bootstrap/app.php';
 
 By default /vendor folder is not included in laravel package, so we need to run:
 
-```
+```bash
 composer install
 ```
 
@@ -85,7 +85,7 @@ APP_URL=http://your-app.com
 
 The next thing you should do is set application key to a random string:
 
-```
+```bash
 php artisan key:generate
 ```
 
@@ -94,19 +94,19 @@ php artisan key:generate
 
 Now it’s time to migrate our tables and seed database. Run:
 
-```
+```bash
 php artisan migrate --seed
 ```
 
 ## Step 9. Create storage directory symlink
 
-```
+```bash
 ln -s /home/<username>/project/storage/app/public/ /home/<username>/public_html/storage
 ```
 
 or create with *php artisan* (this will not work as public/ folder outside of project directory):
 
-```
+```bash
 php artisan storage:link
 ```
 
@@ -114,7 +114,7 @@ php artisan storage:link
 
 We need to set some folder permissions so they are writeable, specifically the `/storage/` and `/bootstrap/cache/` folders.
 
-```
+```bash
 chmod -R o+w storage bootstrap/cache
 ```
 
@@ -122,31 +122,23 @@ chmod -R o+w storage bootstrap/cache
 
 When deploying to production, make sure that you are optimizing Composer's class autoloader map so Composer can quickly find the proper file to load for a given class:
 
-```
+```bash
 composer install --optimize-autoloader --no-dev
 ```
 
-### Optimizing Configuration Loading
+Optimizing configuration, route and view loading:
 
-```
+```bash
 php artisan config:cache
-```
 
-### Optimizing Route Loading
-
-```
 php artisan route:cache
-```
 
-### Optimizing View Loading
-
-```
 php artisan view:cache
 ```
 
 At last you optimize composer autoload files:
 
-```
+```bash
 composer dump-autoload -o
 ```
 
@@ -165,7 +157,7 @@ In the context of Laravel performance tuning, an important tip is not to load al
 
 Even a mid-level Laravel app has a number of files because Laravel has the habit of calling including multiple files for include requests. A simple trick is to declare all the files that would be included to include requests and combine them in a single file. Thus, for all include requests, a single file will be called and loaded. For this, use the following command:
 
-```
+```bash
 php artisan optimize --force
 ```
 
