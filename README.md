@@ -1,5 +1,3 @@
-# Deploy laravel project to shared hosting
-
 ## Step 1. Open Terminal
 
 ```bash
@@ -156,9 +154,19 @@ composer dump-autoload -o
 
 If you have any cron jobs, you should configure them now. Use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
 
-## Step 13. [OPTIONAL] Remove unnecessary files/folders.
 
-When everything is ready and nothing changes in source code, you can delete some files and folders that are only needed during the development:
-- .env
-- composer.json
-- composer.lock
+# Laravel Performance Tips
+
+### 1. Remove Unused Service
+
+In the context of Laravel performance tuning, an important tip is not to load all services through the config. While you are there, always remember to disable unused services in the config files. Add comments to these service providers.
+
+### 2. Classmap Optimization
+
+Even a mid-level Laravel app has a number of files because Laravel has the habit of calling including multiple files for include requests. A simple trick is to declare all the files that would be included to include requests and combine them in a single file. Thus, for all include requests, a single file will be called and loaded. For this, use the following command:
+
+```
+php artisan optimize --force
+```
+
+> For more details please visit [12 Tips for Laravel Performance Optimization](https://www.cloudways.com/blog/laravel-performance-optimization)
