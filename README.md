@@ -1,7 +1,15 @@
 ## Step 1. Open Terminal
 
+Open the SSH terminal on your machine and run the following command:
+
 ```bash
-ssh -p 22 bprouz@188.130.162.10
+ssh -p 22 <username>@<host_ip_address>
+```
+
+Here 22 is a port number, it varies in hosting providers. For example in hostinger.com:
+
+```bash
+ssh -p 65002 u443795110@235.24.119.53
 ```
 
 ## Step 2. Clone git repository outside the public_html directory
