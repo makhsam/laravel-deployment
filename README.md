@@ -40,6 +40,28 @@ require __DIR__.'/../project/vendor/autoload.php';
 $app = require_once __DIR__.'/../project/bootstrap/app.php';
 ```
 
+After public directory has been changed, we need to update the public_path() helper method. Otherwise this error will be shown:
+
+> The Mix manifest does not exist
+
+Add following 3 lines to `register()` method in `\App\Providers\AppServiceProvider`:
+
+```php
+/**
+ * Register any application services.
+ *
+ * @return void
+ */
+public function register()
+{
+    // ...
+    
+    $this->app->bind('path.public', function () {
+        return base_path('../public_html');
+    });
+}
+```
+
 ## Step 4. Run composer install
 
 By default /vendor folder is not included in laravel package, so we need to run:
@@ -158,7 +180,8 @@ In the context of Laravel performance tuning, an important tip is not to load al
 Even a mid-level Laravel app has a number of files because Laravel has the habit of calling including multiple files for include requests. A simple trick is to declare all the files that would be included to include requests and combine them in a single file. Thus, for all include requests, a single file will be called and loaded. For this, use the following command:
 
 ```bash
-php artisan optimize --force
+php artisan optimize
 ```
 
-> For more details please visit [12 Tips for Laravel Performance Optimization](https://www.cloudways.com/blog/laravel-performance-optimization)
+#### For more details please visit
+> [12 Tips for Laravel Performance Optimization](https://www.cloudways.com/blog/laravel-performance-optimization)
