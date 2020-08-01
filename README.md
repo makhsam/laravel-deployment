@@ -111,6 +111,19 @@ APP_DEBUG=false
 APP_URL=http://your-app.com
 ```
 
+### Update default engine to InnoDB
+
+Update following line in `/config/database.php`:
+
+```php
+'mysql' => [
+    // ...
+    'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
+],
+```
+
+> When a table is created with ROW_FORMAT=DYNAMIC, InnoDB can store long variable-length column values (for VARCHAR, VARBINARY, TEXT and BLOB types). Please visit [this link](https://dev.mysql.com/doc/refman/5.7/en/innodb-row-format.html) for more details.
+
 ## Step 7. Application Key
 
 The next thing you should do is set application key to a random string:
