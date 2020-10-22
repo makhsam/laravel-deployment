@@ -1,3 +1,5 @@
+### List git commits between two dates
+
 ```bash
 git log --since "SEP 1 2020" --until "SEP 30 2020" --pretty=format:"%ai: %s" > project-commits.txt
 ```
