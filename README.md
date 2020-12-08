@@ -143,11 +143,19 @@ php artisan migrate --seed
 
 ## Step 9. Create storage directory symlink
 
+Run `pwd` for getting project's BASE_PATH. **In Linux** (Target <= Link):
+
 ```bash
-ln -s /home/<username>/project/storage/app/public/ /home/<username>/public_html/storage
+ln -s {BASE_PATH}/storage/app {BASE_PATH}/public/storage
 ```
 
-or create with *php artisan* (this will not work as public/ folder outside of project directory):
+**In Windows** (Link => Target):
+
+```bash
+mklink /D {BASE_PATH}/public/storage {BASE_PATH}/storage/app
+```
+
+or create with *php artisan* **(This command not exist in Lumen)**:
 
 ```bash
 php artisan storage:link
