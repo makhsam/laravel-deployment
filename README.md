@@ -143,13 +143,13 @@ php artisan migrate --seed
 
 ## Step 9. Create storage directory symlink
 
-Run `pwd` for getting project's BASE_PATH. **In Linux** (Target <= Link):
+Run `pwd` for getting project's BASE_PATH. **In Linux** (Target &#8592; Link):
 
 ```bash
 ln -s {BASE_PATH}/storage/app {BASE_PATH}/public/storage
 ```
 
-**In Windows** (Link => Target):
+**In Windows** (Link &#8594; Target):
 
 ```bash
 mklink /D {BASE_PATH}/public/storage {BASE_PATH}/storage/app
