@@ -207,7 +207,7 @@ It will open up `/var/spool/cron/crontabs/` in text editor. Paste the following 
 * * * * * cd /var/www/laravel-app && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-It means to run `php artisan schedule:run` command every minute. Use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
+It means to run `php artisan schedule:run` command every minute. For reference, use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
 
 
 # Laravel Performance Tips
