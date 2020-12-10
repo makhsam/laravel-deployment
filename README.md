@@ -90,7 +90,7 @@ Copy the example file to new `.env` file using `cp .env.example .env`
 
 Now open the `.env` file and update the necessary configuration changes such as application name and database information.
 
-```
+```dosini
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -103,7 +103,7 @@ DB_PASSWORD=
 
 Set `APP_DEBUG` to `false` and `APP_ENV` to `production`, and update the `APP_NAME` and `APP_URL` accordingly. If you leave `APP_DEBUG` as true, in the event of errors you’ll be displaying sensitive debug information to the world:
 
-```
+```dosini
 APP_NAME="Project name"
 APP_ENV=production
 APP_KEY=
