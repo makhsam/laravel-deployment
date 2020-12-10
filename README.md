@@ -195,7 +195,19 @@ composer dump-autoload -o
 
 ## Step 12. Set up Laravel Scheduler
 
-If you have any cron jobs, you should configure them now. Use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
+If you have any cron jobs, you should configure them now. In your project directory, run this command:
+
+```bash
+crontab -e
+```
+
+It will open up `/var/spool/cron/crontabs/` in text editor. Paste the following expression there:
+
+```bash
+* * * * * cd /var/www/laravel-app && php artisan schedule:run >> /dev/null 2>&1
+```
+
+It means to run `php artisan schedule:run` command every minute. Use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
 
 
 # Laravel Performance Tips
