@@ -1,74 +1,89 @@
 ## Step 1. Open Terminal
 
-Open the SSH terminal on your machine and run the following command:
+<details>
+    <summary>Click to expand!</summary>
 
-```bash
-ssh -p 22 <username>@<host_ip_address>
-```
+    Open the SSH terminal on your machine and run the following command:
 
-Here 22 is a port number, it varies in hosting providers. For example in hostinger.com:
+    ```bash
+    ssh -p 22 <username>@<host_ip_address>
+    ```
 
-```bash
-ssh -p 65002 u443795110@235.24.119.53
-```
+    Here 22 is a port number, it varies in hosting providers. For example in hostinger.com:
+
+    ```bash
+    ssh -p 65002 u443795110@235.24.119.53
+    ```
+
+</details>
 
 ## Step 2. Clone git repository outside the public_html directory
 
-First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current `public_html/` directory, which is accessible publicly via web domain, for example:
+<details>
+    <summary>Click to expand!</summary>
 
-```bash
-/home/<username>/public_html
-```
+    First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current `public_html/` directory, which is accessible publicly via web domain, for example:
 
-Now, create a new directory, which contains all your application source code, at the same level as `public_html/`, for example:
+    ```bash
+    /home/<username>/public_html
+    ```
 
-```bash
-/home/<username>/project
-```
+    Now, create a new directory, which contains all your application source code, at the same level as `public_html/`, for example:
 
-Use *git* to transfer your code to this directory:
+    ```bash
+    /home/<username>/project
+    ```
 
-```bash
-git clone https://github.com/username/your-app project
-```
+    Use _git_ to transfer your code to this directory:
+
+    ```bash
+    git clone https://github.com/username/your-app project
+    ```
+
+</details>
 
 ## Step 3. Move the contents of public/ directory to public_html/ and delete public/ directory from project/
 
-Then, navigate to the public_html/ folder and locate the index.php file. Find the following lines:
+<details>
+    <summary>Click to expand!</summary>
 
-```php
-require __DIR__.'/../vendor/autoload.php';
-$app = require_once __DIR__.'/../bootstrap/app.php';
-```
+    Then, navigate to the public_html/ folder and locate the index.php file. Find the following lines:
 
-And update them to the correct paths as following:
+    ```php
+    require __DIR__.'/../vendor/autoload.php';
+    $app = require_once __DIR__.'/../bootstrap/app.php';
+    ```
 
-```php
-require __DIR__.'/../project/vendor/autoload.php';
-$app = require_once __DIR__.'/../project/bootstrap/app.php';
-```
+    And update them to the correct paths as following:
 
-After public directory has been changed, we need to update the public_path() helper method. Otherwise this error will be shown:
+    ```php
+    require __DIR__.'/../project/vendor/autoload.php';
+    $app = require_once __DIR__.'/../project/bootstrap/app.php';
+    ```
 
-> The Mix manifest does not exist
+    After public directory has been changed, we need to update the public_path() helper method. Otherwise this error will be shown:
 
-Add following 3 lines to `register()` method in `\App\Providers\AppServiceProvider`:
+    > The Mix manifest does not exist
 
-```php
-/**
- * Register any application services.
- *
- * @return void
- */
-public function register()
-{
-    // ...
-    
-    $this->app->bind('path.public', function () {
-        return base_path('../public_html');
-    });
-}
-```
+    Add following 3 lines to `register()` method in `\App\Providers\AppServiceProvider`:
+
+    ```php
+    /**
+    * Register any application services.
+    *
+    * @return void
+    */
+    public function register()
+    {
+        // ...
+
+        $this->app->bind('path.public', function () {
+            return base_path('../public_html');
+        });
+    }
+    ```
+
+</details>
 
 ## Step 4. Run composer install
 
@@ -78,7 +93,7 @@ By default /vendor folder is not included in laravel package, so we need to run:
 composer install
 ```
 
-Now laravel and its *dependencies* are installed via composer.
+Now laravel and its _dependencies_ are installed via composer.
 
 ## Step 5. Create MySQL database
 
@@ -113,16 +128,21 @@ APP_URL=http://your-app.com
 
 ### Update default engine to InnoDB
 
-Update following line in `/config/database.php`:
+<details>
+    <summary>Click to expand!</summary>
 
-```php
-'mysql' => [
-    // ...
-    'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
-],
-```
+    Update following line in `/config/database.php`:
 
-> When a table is created with ROW_FORMAT=DYNAMIC, InnoDB can store long variable-length column values (for VARCHAR, VARBINARY, TEXT and BLOB types). Please visit [this link](https://dev.mysql.com/doc/refman/5.7/en/innodb-row-format.html) for more details.
+    ```php
+    'mysql' => [
+        // ...
+        'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
+    ],
+    ```
+
+    > When a table is created with ROW_FORMAT=DYNAMIC, InnoDB can store long variable-length column values (for VARCHAR, VARBINARY, TEXT and BLOB types). Please visit [this link](https://dev.mysql.com/doc/refman/5.7/en/innodb-row-format.html) for more details.
+
+</details>
 
 ## Step 7. Application Key
 
@@ -131,7 +151,6 @@ The next thing you should do is set application key to a random string:
 ```bash
 php artisan key:generate
 ```
-
 
 ## Step 8. Execute Database Migration and Seeder
 
@@ -155,7 +174,7 @@ ln -s {BASE_PATH}/storage/app {BASE_PATH}/public/storage
 mklink /D {BASE_PATH}/public/storage {BASE_PATH}/storage/app
 ```
 
-or create with *php artisan* **(This command not exist in Lumen)**:
+or create with _php artisan_ **(This command not exist in Lumen)**:
 
 ```bash
 php artisan storage:link
@@ -209,7 +228,6 @@ It will open up `/var/spool/cron/crontabs/` in text editor. Paste the following 
 
 It means to run `php artisan schedule:run` command every minute. For reference, use following editor for cron schedule expressions: [Crontab guru](https://crontab.guru)
 
-
 # Laravel Performance Tips
 
 ### 1. Remove Unused Service
@@ -225,4 +243,5 @@ php artisan optimize
 ```
 
 #### For more details please visit
+
 > [12 Tips for Laravel Performance Optimization](https://www.cloudways.com/blog/laravel-performance-optimization)
