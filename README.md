@@ -2,8 +2,8 @@
 
 <details>
 <summary>Click to expand!</summary>
-
 <p>
+
     Open the SSH terminal on your machine and run the following command:
 
     ```bash
@@ -23,8 +23,8 @@
 
 <details>
 <summary>Click to expand!</summary>
-
 <p>
+
     First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current `public_html/` directory, which is accessible publicly via web domain, for example:
 
     ```bash
@@ -50,8 +50,8 @@
 
 <details>
 <summary>Click to expand!</summary>
-
 <p>
+
     Then, navigate to the public_html/ folder and locate the index.php file. Find the following lines:
 
     ```php
@@ -136,8 +136,8 @@ APP_URL=http://your-app.com
 
 <details>
 <summary>Click to expand!</summary>
-
 <p>
+
     Update following line in `/config/database.php`:
 
     ```php
