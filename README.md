@@ -1,8 +1,9 @@
 ## Step 1. Open Terminal
 
 <details>
-    <summary>Click to expand!</summary>
+<summary>Click to expand!</summary>
 
+<p>
     Open the SSH terminal on your machine and run the following command:
 
     ```bash
@@ -15,13 +16,15 @@
     ssh -p 65002 u443795110@235.24.119.53
     ```
 
+</p>
 </details>
 
 ## Step 2. Clone git repository outside the public_html directory
 
 <details>
-    <summary>Click to expand!</summary>
+<summary>Click to expand!</summary>
 
+<p>
     First, let say in your hosting server (VPS, or shared hosting ... whatever), you have current `public_html/` directory, which is accessible publicly via web domain, for example:
 
     ```bash
@@ -40,13 +43,15 @@
     git clone https://github.com/username/your-app project
     ```
 
+</p>
 </details>
 
 ## Step 3. Move the contents of public/ directory to public_html/ and delete public/ directory from project/
 
 <details>
-    <summary>Click to expand!</summary>
+<summary>Click to expand!</summary>
 
+<p>
     Then, navigate to the public_html/ folder and locate the index.php file. Find the following lines:
 
     ```php
@@ -83,6 +88,7 @@
     }
     ```
 
+</p>
 </details>
 
 ## Step 4. Run composer install
@@ -129,8 +135,9 @@ APP_URL=http://your-app.com
 ### Update default engine to InnoDB
 
 <details>
-    <summary>Click to expand!</summary>
+<summary>Click to expand!</summary>
 
+<p>
     Update following line in `/config/database.php`:
 
     ```php
@@ -142,6 +149,7 @@ APP_URL=http://your-app.com
 
     > When a table is created with ROW_FORMAT=DYNAMIC, InnoDB can store long variable-length column values (for VARCHAR, VARBINARY, TEXT and BLOB types). Please visit [this link](https://dev.mysql.com/doc/refman/5.7/en/innodb-row-format.html) for more details.
 
+</p>
 </details>
 
 ## Step 7. Application Key
